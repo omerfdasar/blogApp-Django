@@ -28,7 +28,7 @@ class Post(models.Model):
         Category, on_delete=models.PROTECT)
     publish_date = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, default=2)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField(max_length=10, choices=OPTIONS, default='d')
     slug = models.SlugField(blank=True, unique=True)
 
@@ -61,3 +61,6 @@ class PostView(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+# 2:13:17
