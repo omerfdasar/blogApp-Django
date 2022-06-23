@@ -1,5 +1,7 @@
+from django import forms
 from django.db import models
 from django.contrib.auth.models import User
+# from .models import Profile
 
 
 def user_profile_path(instance, filename):
@@ -14,3 +16,14 @@ class Profile(models.Model):
 
     def __str__(self):
         return "{} Profile".format(self.user)
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ("image", "bio")
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ("username", "email")    
