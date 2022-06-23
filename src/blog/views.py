@@ -1,7 +1,7 @@
 from multiprocessing import context
 from django.shortcuts import get_object_or_404, redirect, render
-from blog.forms import PostForm
-from .models import Post
+from blog.forms import CommentForm, PostForm
+from .models import Like, Post
 
 
 def post_list(request):
@@ -28,9 +28,20 @@ def post_create(request):
 
 
 def post_detail(request, slug):
+    form = CommentForm()
     obj = get_object_or_404(Post, slug=slug)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = request.user
+            comment.post = obj
+            comment.save()
+            return redirect("blog:detail", slug=slug)
+
     context = {
-        "object": obj
+        "object": obj,
+        "form": form
     }
     return render(request, 'blog/post_detail.html', context)
 
@@ -57,4 +68,16 @@ def post_delete(request, slug):
     context = {
         'object': obj
     }
-    return render(request,"blog/post_delete.html", context)
+    return render(request, "blog/post_delete.html", context)
+
+
+def like(request, slug):
+    if request.method == "POST":
+        obj = get_object_or_404(Post, slug=slug)
+        like_qs = Like.objects.filter(user=request.user, post=obj)
+        if like_qs.exists():
+            like_qs[0].delete()
+        else:
+            Like.objects.create(user=request.user, post=obj)
+
+        return redirect("blog:detail", slug=slug)
