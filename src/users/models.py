@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 def user_profile_path(instance, filename):
-    return 'user/{0}{1}'.format(instance.user.id, filename)
+    return 'user/{0}/{1}'.format(instance.user.id, filename)
 
 
 class Profile(models.Model):
