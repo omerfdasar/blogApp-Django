@@ -127,6 +127,10 @@ MEDIA_ROOT = BASE_DIR / 'media_root'
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
+LOGIN_REDIRECT_URL = "blog:list"
+LOGIN_URL = "login"
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
