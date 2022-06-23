@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from blog.forms import CommentForm, PostForm
 from .models import Like, Post
