@@ -1,7 +1,7 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import render, redirect
+from .forms import RegistrationForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib import messages
-from users.models import ProfileUpdateForm, UserUpdateForm
-from .forms import RegistrationForm
+
 
 
 def register(request):
