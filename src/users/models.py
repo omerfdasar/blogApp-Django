@@ -18,12 +18,3 @@ class Profile(models.Model):
         return "{} Profile".format(self.user)
 
 
-class ProfileUpdateForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = ("image", "bio")
-
-class UserUpdateForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ("username", "email")    
